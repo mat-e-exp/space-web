@@ -1,0 +1,836 @@
+{
+  "version": "1.2.0",
+  "metadata": {
+    "name": "Space Defense",
+    "description": "Orbital defense arcade game with 20 waves",
+    "lastModified": "2025-12-12"
+  },
+
+  "player": {
+    "startingLives": 3,
+    "maxLives": 5,
+    "startingEarthHealth": 20,
+    "maxEarthHealth": 50,
+    "orbitRadius": 70,
+    "startingRotationSpeed": 0.035,
+    "maxRotationSpeed": 0.105,
+    "rotationSpeedIncrement": 0.007,
+    "startingBulletSpeed": 3.75,
+    "maxBulletSpeed": 12.0,
+    "bulletSpeedIncrement": 0.5,
+    "startingFireRate": 20,
+    "minFireRate": 6,
+    "fireRateIncrement": -2,
+    "startingBulletMode": 1,
+    "maxBulletMode": 5,
+    "shipSize": 12,
+    "bulletSize": 3
+  },
+
+  "scoring": {
+    "extraLifeEvery": 10000
+  },
+
+  "deathPenalty": {
+    "speedLoss": {
+      "fixed": 1,
+      "percent": 0.25,
+      "method": "whichever_more"
+    },
+    "fireRateLoss": {
+      "fixed": 1,
+      "percent": 0.25,
+      "method": "whichever_more"
+    },
+    "bulletSpeedLoss": {
+      "fixed": 1,
+      "percent": 0.25,
+      "method": "whichever_more"
+    },
+    "weaponDowngrade": {
+      "tiers": 1
+    },
+    "missileLossChance": 0.5,
+    "alwaysLoseAutoFire": true,
+    "clearMirrorShip": true,
+    "clearScreenClear": true
+  },
+
+  "alienTypes": [
+    {
+      "id": "yellow_invader",
+      "name": "Yellow Invader",
+      "unlockLevel": 1,
+      "health": 1,
+      "baseSpeed": 1.1,
+      "points": 10,
+      "size": 10,
+      "color": "#ffff00",
+      "secondaryColor": "#ff8800",
+      "shape": "invader1",
+      "flightPattern": "straight",
+      "spawnWeight": 40,
+      "isBonus": false
+    },
+    {
+      "id": "blue_zapper",
+      "name": "Blue Zapper",
+      "unlockLevel": 2,
+      "health": 1,
+      "baseSpeed": 1.2,
+      "points": 12,
+      "size": 9,
+      "color": "#0088ff",
+      "secondaryColor": "#0044aa",
+      "shape": "invader2",
+      "flightPattern": "straight_wobble",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "rainbow_bonus",
+      "name": "Rainbow Bonus",
+      "unlockLevel": 2,
+      "health": 1,
+      "baseSpeed": 1.7,
+      "points": 100,
+      "size": 12,
+      "color": "#00ffff",
+      "secondaryColor": "#0088ff",
+      "shape": "bonus",
+      "flightPattern": "straight",
+      "spawnWeight": 5,
+      "isBonus": true
+    },
+    {
+      "id": "green_scout",
+      "name": "Green Scout",
+      "unlockLevel": 3,
+      "health": 1,
+      "baseSpeed": 1.3,
+      "points": 15,
+      "size": 8,
+      "color": "#00ff00",
+      "secondaryColor": "#00aa00",
+      "shape": "invader2",
+      "flightPattern": "random_drift",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "pink_weaver",
+      "name": "Pink Weaver",
+      "unlockLevel": 4,
+      "health": 1,
+      "baseSpeed": 1.24,
+      "points": 14,
+      "size": 9,
+      "color": "#ff88ff",
+      "secondaryColor": "#ff44ff",
+      "shape": "invader1",
+      "flightPattern": "straight_wobble",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "orange_ufo",
+      "name": "Orange UFO",
+      "unlockLevel": 5,
+      "health": 2,
+      "baseSpeed": 1.1,
+      "points": 30,
+      "size": 12,
+      "color": "#ff8800",
+      "secondaryColor": "#ff6600",
+      "shape": "invader3",
+      "flightPattern": "two_step",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "cyan_dasher",
+      "name": "Cyan Dasher",
+      "unlockLevel": 6,
+      "health": 1,
+      "baseSpeed": 1.5,
+      "points": 16,
+      "size": 9,
+      "color": "#00ffff",
+      "secondaryColor": "#00aaaa",
+      "shape": "invader1",
+      "flightPattern": "stop_and_go",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "red_dart",
+      "name": "Red Dart",
+      "unlockLevel": 7,
+      "health": 1,
+      "baseSpeed": 2.0,
+      "points": 20,
+      "size": 8,
+      "color": "#ff0000",
+      "secondaryColor": "#aa0000",
+      "shape": "invader1",
+      "flightPattern": "kamikaze",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "purple_bomber",
+      "name": "Purple Bomber",
+      "unlockLevel": 8,
+      "health": 2,
+      "baseSpeed": 1.3,
+      "points": 35,
+      "size": 14,
+      "color": "#aa00ff",
+      "secondaryColor": "#8800cc",
+      "shape": "invader2",
+      "flightPattern": "two_step",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "lime_runner",
+      "name": "Lime Runner",
+      "unlockLevel": 9,
+      "health": 1,
+      "baseSpeed": 1.6,
+      "points": 18,
+      "size": 9,
+      "color": "#88ff00",
+      "secondaryColor": "#66cc00",
+      "shape": "invader2",
+      "flightPattern": "random_drift",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "cyan_spinner",
+      "name": "Cyan Spinner",
+      "unlockLevel": 10,
+      "health": 1,
+      "baseSpeed": 1.0,
+      "points": 18,
+      "size": 10,
+      "color": "#00ffff",
+      "secondaryColor": "#00aaaa",
+      "shape": "invader1",
+      "flightPattern": "spiral",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "red_battleship",
+      "name": "Red Battleship",
+      "unlockLevel": 11,
+      "health": 3,
+      "baseSpeed": 0.9,
+      "points": 60,
+      "size": 18,
+      "color": "#cc0000",
+      "secondaryColor": "#880000",
+      "shape": "invader3",
+      "flightPattern": "slow_drift",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "teal_striker",
+      "name": "Teal Striker",
+      "unlockLevel": 12,
+      "health": 2,
+      "baseSpeed": 1.8,
+      "points": 28,
+      "size": 10,
+      "color": "#00cc88",
+      "secondaryColor": "#008866",
+      "shape": "invader1",
+      "flightPattern": "stop_and_go",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "white_speeder",
+      "name": "White Speeder",
+      "unlockLevel": 13,
+      "health": 1,
+      "baseSpeed": 2.4,
+      "points": 25,
+      "size": 9,
+      "color": "#ffffff",
+      "secondaryColor": "#cccccc",
+      "shape": "invader1",
+      "flightPattern": "spiral",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "blue_tank",
+      "name": "Blue Tank",
+      "unlockLevel": 14,
+      "health": 3,
+      "baseSpeed": 1.06,
+      "points": 50,
+      "size": 16,
+      "color": "#0088ff",
+      "secondaryColor": "#0044aa",
+      "shape": "invader3",
+      "flightPattern": "slow_drift",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "purple_cruiser",
+      "name": "Purple Cruiser",
+      "unlockLevel": 15,
+      "health": 3,
+      "baseSpeed": 1.2,
+      "points": 55,
+      "size": 15,
+      "color": "#8800ff",
+      "secondaryColor": "#6600cc",
+      "shape": "invader2",
+      "flightPattern": "two_step",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "magenta_zigzag",
+      "name": "Magenta Zigzag",
+      "unlockLevel": 16,
+      "health": 1,
+      "baseSpeed": 1.5,
+      "points": 22,
+      "size": 10,
+      "color": "#ff00ff",
+      "secondaryColor": "#cc00cc",
+      "shape": "invader1",
+      "flightPattern": "zigzag",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "green_heavy",
+      "name": "Green Heavy",
+      "unlockLevel": 17,
+      "health": 3,
+      "baseSpeed": 0.9,
+      "points": 58,
+      "size": 17,
+      "color": "#00aa00",
+      "secondaryColor": "#006600",
+      "shape": "invader3",
+      "flightPattern": "slow_drift",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "orange_kamikaze",
+      "name": "Orange Kamikaze",
+      "unlockLevel": 18,
+      "health": 1,
+      "baseSpeed": 2.6,
+      "points": 30,
+      "size": 8,
+      "color": "#ffaa00",
+      "secondaryColor": "#ff8800",
+      "shape": "invader1",
+      "flightPattern": "kamikaze",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "cyan_destroyer",
+      "name": "Cyan Destroyer",
+      "unlockLevel": 19,
+      "health": 4,
+      "baseSpeed": 1.1,
+      "points": 80,
+      "size": 18,
+      "color": "#00ccff",
+      "secondaryColor": "#0088cc",
+      "shape": "invader3",
+      "flightPattern": "random_drift",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "yellow_interceptor",
+      "name": "Yellow Interceptor",
+      "unlockLevel": 19,
+      "health": 2,
+      "baseSpeed": 1.9,
+      "points": 40,
+      "size": 11,
+      "color": "#ffff00",
+      "secondaryColor": "#cccc00",
+      "shape": "invader2",
+      "flightPattern": "swave",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "pink_sparkler",
+      "name": "Pink Sparkler",
+      "unlockLevel": 20,
+      "health": 1,
+      "baseSpeed": 1.4,
+      "points": 20,
+      "size": 10,
+      "color": "#ff88ff",
+      "secondaryColor": "#ff44ff",
+      "shape": "invader1",
+      "flightPattern": "stop_and_go",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "orange_dreadnought",
+      "name": "Orange Dreadnought",
+      "unlockLevel": 20,
+      "health": 4,
+      "baseSpeed": 1.0,
+      "points": 90,
+      "size": 20,
+      "color": "#ff6600",
+      "secondaryColor": "#cc4400",
+      "shape": "invader3",
+      "flightPattern": "slow_drift",
+      "spawnWeight": 15,
+      "isBonus": false
+    },
+    {
+      "id": "white_phantom",
+      "name": "White Phantom",
+      "unlockLevel": 20,
+      "health": 2,
+      "baseSpeed": 2.0,
+      "points": 45,
+      "size": 11,
+      "color": "#eeeeee",
+      "secondaryColor": "#aaaaaa",
+      "shape": "invader2",
+      "flightPattern": "teleport",
+      "spawnWeight": 10,
+      "isBonus": false
+    },
+    {
+      "id": "black_boss",
+      "name": "Black Boss",
+      "unlockLevel": 20,
+      "health": 5,
+      "baseSpeed": 1.2,
+      "points": 150,
+      "size": 22,
+      "color": "#333333",
+      "secondaryColor": "#000000",
+      "shape": "invader3",
+      "flightPattern": "slow_drift",
+      "spawnWeight": 10,
+      "isBonus": false
+    }
+  ],
+
+  "powerUpTypes": [
+    {
+      "id": "speed",
+      "type": "speed",
+      "label": "SPD",
+      "color": "#00ff00",
+      "unlockLevel": 2,
+      "effect": "rotationSpeed",
+      "increment": 0.007,
+      "baseWeight": 10
+    },
+    {
+      "id": "double",
+      "type": "double",
+      "label": "x2",
+      "color": "#ffff00",
+      "unlockLevel": 2,
+      "effect": "bulletMode",
+      "targetValue": 2,
+      "baseWeight": 10
+    },
+    {
+      "id": "firerate",
+      "type": "firerate",
+      "label": "FR",
+      "color": "#00ffff",
+      "unlockLevel": 2,
+      "effect": "fireRate",
+      "increment": -5,
+      "baseWeight": 10
+    },
+    {
+      "id": "earthhealth",
+      "type": "earthhealth",
+      "label": "+HP",
+      "color": "#0088ff",
+      "unlockLevel": 2,
+      "effect": "earthHealth",
+      "increment": 1,
+      "baseWeight": 10
+    },
+    {
+      "id": "bulletspeed",
+      "type": "bulletspeed",
+      "label": "BLT",
+      "color": "#ff00ff",
+      "unlockLevel": 2,
+      "effect": "bulletSpeed",
+      "increment": 0.5,
+      "baseWeight": 10
+    },
+    {
+      "id": "triple",
+      "type": "triple",
+      "label": "x3",
+      "color": "#ff8800",
+      "unlockLevel": 6,
+      "effect": "bulletMode",
+      "targetValue": 3,
+      "baseWeight": 10
+    },
+    {
+      "id": "extralife",
+      "type": "extralife",
+      "label": "1UP",
+      "color": "#00ff00",
+      "unlockLevel": 11,
+      "effect": "lives",
+      "increment": 1,
+      "baseWeight": 10
+    },
+    {
+      "id": "quadruple",
+      "type": "quadruple",
+      "label": "x4",
+      "color": "#ff4400",
+      "unlockLevel": 12,
+      "effect": "bulletMode",
+      "targetValue": 4,
+      "baseWeight": 10
+    },
+    {
+      "id": "mirrorship",
+      "type": "mirrorship",
+      "label": "2X",
+      "color": "#ffffff",
+      "unlockLevel": 10,
+      "effect": "mirrorShip",
+      "duration": 1800,
+      "baseWeight": 10
+    },
+    {
+      "id": "quintuple",
+      "type": "quintuple",
+      "label": "x5",
+      "color": "#ff0000",
+      "unlockLevel": 16,
+      "effect": "bulletMode",
+      "targetValue": 5,
+      "baseWeight": 10
+    }
+  ],
+
+  "superweaponTypes": [
+    {
+      "id": "shield",
+      "name": "Shield",
+      "label": "SHIELD",
+      "color": "#00ffff",
+      "unlockLevel": 5,
+      "effect": "shield",
+      "duration": 300,
+      "description": "Pulsing ring around Earth that kills aliens and protects Earth"
+    },
+    {
+      "id": "hyperkill",
+      "name": "HyperKill",
+      "label": "HYPERKILL",
+      "color": "#ff0000",
+      "unlockLevel": 5,
+      "effect": "hyperKill",
+      "duration": 0,
+      "description": "Instantly destroys all enemies on screen"
+    },
+    {
+      "id": "satellites",
+      "name": "Satellites",
+      "label": "SATELLITES",
+      "color": "#ffff00",
+      "unlockLevel": 5,
+      "effect": "satellites",
+      "duration": 300,
+      "description": "4 satellites in square formation that rotate and shoot with ship"
+    },
+    {
+      "id": "quad",
+      "name": "Quad",
+      "label": "QUAD",
+      "color": "#ff00ff",
+      "unlockLevel": 5,
+      "effect": "quad",
+      "duration": 300,
+      "description": "4 ships around Earth that all move and shoot together"
+    },
+    {
+      "id": "rockets",
+      "name": "Rockets",
+      "label": "ROCKETS",
+      "color": "#ff8800",
+      "unlockLevel": 5,
+      "effect": "rockets",
+      "duration": 300,
+      "description": "All bullets become homing mini rockets"
+    }
+  ],
+
+  "levels": [
+    {
+      "level": 1,
+      "aliensToKill": 8,
+      "spawnRate": 80,
+      "speedMultiplier": 1.0,
+      "bonusSpawnKillInterval": 10,
+      "description": "Tutorial level - basic straight-line enemies"
+    },
+    {
+      "level": 2,
+      "aliensToKill": 11,
+      "spawnRate": 70,
+      "speedMultiplier": 1.1,
+      "bonusSpawnKillInterval": 10,
+      "description": "Power-ups begin, bonus ships appear"
+    },
+    {
+      "level": 3,
+      "aliensToKill": 14,
+      "spawnRate": 60,
+      "speedMultiplier": 1.2,
+      "bonusSpawnKillInterval": 10,
+      "description": "Faster enemies introduced"
+    },
+    {
+      "level": 4,
+      "aliensToKill": 17,
+      "spawnRate": 50,
+      "speedMultiplier": 1.3,
+      "bonusSpawnKillInterval": 10,
+      "description": "Speed continues to increase"
+    },
+    {
+      "level": 5,
+      "aliensToKill": 20,
+      "spawnRate": 40,
+      "speedMultiplier": 1.4,
+      "bonusSpawnKillInterval": 10,
+      "description": "First 2-health enemy (Orange UFO)"
+    },
+    {
+      "level": 6,
+      "aliensToKill": 34,
+      "spawnRate": 81,
+      "speedMultiplier": 1.52,
+      "bonusSpawnKillInterval": 10,
+      "description": "Major difficulty spike, triple shot unlocked"
+    },
+    {
+      "level": 7,
+      "aliensToKill": 38,
+      "spawnRate": 72,
+      "speedMultiplier": 1.64,
+      "bonusSpawnKillInterval": 10,
+      "description": "Kamikaze enemies and missiles unlocked"
+    },
+    {
+      "level": 8,
+      "aliensToKill": 42,
+      "spawnRate": 63,
+      "speedMultiplier": 1.76,
+      "bonusSpawnKillInterval": 10,
+      "description": "More 2-health enemies"
+    },
+    {
+      "level": 9,
+      "aliensToKill": 46,
+      "spawnRate": 54,
+      "speedMultiplier": 1.88,
+      "bonusSpawnKillInterval": 10,
+      "description": "Fast runners increase pressure"
+    },
+    {
+      "level": 10,
+      "aliensToKill": 50,
+      "spawnRate": 45,
+      "speedMultiplier": 2.0,
+      "bonusSpawnKillInterval": 10,
+      "description": "Spiral movement pattern introduced"
+    },
+    {
+      "level": 11,
+      "aliensToKill": 59,
+      "spawnRate": 35,
+      "speedMultiplier": 2.16,
+      "bonusSpawnKillInterval": 10,
+      "description": "First 3-health enemy, extra lives unlocked"
+    },
+    {
+      "level": 12,
+      "aliensToKill": 63,
+      "spawnRate": 30,
+      "speedMultiplier": 2.32,
+      "bonusSpawnKillInterval": 10,
+      "description": "Quadruple shot and mirror ship unlocked"
+    },
+    {
+      "level": 13,
+      "aliensToKill": 67,
+      "spawnRate": 25,
+      "speedMultiplier": 2.48,
+      "bonusSpawnKillInterval": 10,
+      "description": "Screen clear emergency power unlocked"
+    },
+    {
+      "level": 14,
+      "aliensToKill": 71,
+      "spawnRate": 20,
+      "speedMultiplier": 2.64,
+      "bonusSpawnKillInterval": 10,
+      "description": "Heavy tanks increase difficulty"
+    },
+    {
+      "level": 15,
+      "aliensToKill": 75,
+      "spawnRate": 20,
+      "speedMultiplier": 2.8,
+      "bonusSpawnKillInterval": 10,
+      "description": "Multiple 3-health enemies"
+    },
+    {
+      "level": 16,
+      "aliensToKill": 84,
+      "spawnRate": 20,
+      "speedMultiplier": 3.04,
+      "bonusSpawnKillInterval": 10,
+      "description": "Zigzag pattern, quintuple shot unlocked"
+    },
+    {
+      "level": 17,
+      "aliensToKill": 88,
+      "spawnRate": 20,
+      "speedMultiplier": 3.28,
+      "bonusSpawnKillInterval": 10,
+      "description": "Heavy enemies dominate"
+    },
+    {
+      "level": 18,
+      "aliensToKill": 92,
+      "spawnRate": 20,
+      "speedMultiplier": 3.52,
+      "bonusSpawnKillInterval": 10,
+      "description": "Fast kamikaze attacks"
+    },
+    {
+      "level": 19,
+      "aliensToKill": 96,
+      "spawnRate": 20,
+      "speedMultiplier": 3.76,
+      "bonusSpawnKillInterval": 10,
+      "description": "First 4-health enemies, S-wave pattern"
+    },
+    {
+      "level": 20,
+      "aliensToKill": 100,
+      "spawnRate": 20,
+      "speedMultiplier": 4.0,
+      "bonusSpawnKillInterval": 10,
+      "description": "Final boss wave with 5-health Black Boss"
+    }
+  ],
+
+  "flightPatterns": {
+    "straight": {
+      "description": "Move directly toward Earth in a straight line",
+      "parameters": {}
+    },
+    "straight_wobble": {
+      "description": "Move toward Earth with perpendicular wobble",
+      "parameters": {
+        "wobbleAmplitude": 0.8,
+        "wobbleFrequency": 0.1
+      }
+    },
+    "kamikaze": {
+      "description": "Straight aggressive charge at increased speed",
+      "parameters": {
+        "speedMultiplier": 1.2
+      }
+    },
+    "spiral": {
+      "description": "Orbit while moving closer to Earth",
+      "parameters": {
+        "orbitSpeed": 0.02,
+        "inwardSpeedMultiplier": 0.5
+      }
+    },
+    "slow_drift": {
+      "description": "Move with periodic course corrections",
+      "parameters": {
+        "speedMultiplier": 0.7,
+        "recalculateInterval": 120
+      }
+    },
+    "zigzag": {
+      "description": "Perpendicular sine wave while approaching",
+      "parameters": {
+        "wobbleAmplitude": 0.8,
+        "wobbleFrequency": 0.1
+      }
+    },
+    "swave": {
+      "description": "Subtle S-shaped approach pattern",
+      "parameters": {
+        "wobbleAmplitude": 1.2,
+        "wobbleFrequency": 0.03
+      }
+    },
+    "teleport": {
+      "description": "Jump forward periodically",
+      "parameters": {
+        "jumpInterval": 90,
+        "jumpDistance": 60,
+        "driftSpeedMultiplier": 0.3
+      }
+    },
+    "random_drift": {
+      "description": "Wanders randomly in all directions with slow Earth bias",
+      "parameters": {
+        "wanderStrength": 0.5,
+        "earthBias": 0.15,
+        "directionChangeInterval": 60
+      }
+    },
+    "two_step": {
+      "description": "Two steps forward, one step back rhythm",
+      "parameters": {
+        "forwardFrames": 40,
+        "backwardFrames": 20,
+        "backwardSpeedMultiplier": 0.6
+      }
+    },
+    "stop_and_go": {
+      "description": "Move in, pause, sidestep, pause, repeat",
+      "parameters": {
+        "moveFrames": 30,
+        "pauseFrames": 20,
+        "sidestepFrames": 25,
+        "sidestepDistance": 40
+      }
+    }
+  }
+}
