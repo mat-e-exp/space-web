@@ -4,6 +4,8 @@ A retro-style 8-bit browser-based arcade game where you defend Earth from alien 
 
 ![Space Defense](https://img.shields.io/badge/Game-HTML5%20Canvas-green) ![No Dependencies](https://img.shields.io/badge/Dependencies-None-blue)
 
+![Space Defense Screenshot](screenshot.png)
+
 ## Play Now
 
 **[Play on GitHub Pages](https://mat-e-exp.github.io/space-web/)** (once deployed)
