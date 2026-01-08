@@ -67,6 +67,37 @@ open http://localhost:3110/index.html
 | Extra Life | +1 Life | Additional life |
 | Earth HP | +Health | Restore Earth's health |
 
+### Med Ship System
+
+A special ship that appears during gameplay to provide health support:
+
+- **Spawn timing**: Waves 3, 5, 7, 9 (every other), then every wave from 10+
+- **Appears**: After 5 kills on eligible waves
+- **Two phases**:
+  1. **Alien phase**: Red/orange hostile ship - shoot to activate
+  2. **Med Ship phase**: White/silver ship with red cross - each hit drops a med pack
+- **Med packs**: White cases with red cross that heal Earth +1 HP when they reach it
+- **Music**: Pulsing sci-fi theme plays while med ship is on screen
+
+### Superweapon Pack System
+
+Superweapons spawn as a single bright pickup with a number:
+
+- **Appearance**: Rainbow-cycling white circle with number 1-5 inside
+- **Effect**: Collecting gives that many random superweapons (e.g., "3" = 3 random superweapons)
+- **Cooldown**: 1-second delay after collection before superweapons can be triggered (prevents accidental use)
+- **Auto-collect**: Superweapons and lives auto-collect when reaching Earth
+
+### Superweapons
+
+| Key | Superweapon | Effect |
+|-----|-------------|--------|
+| 1 | Shield | Pulsing ring around Earth that kills aliens |
+| 2 | HyperKill | Instantly destroys all enemies on screen |
+| 3 | Satellites | 4 satellites in formation that rotate and shoot |
+| 4 | Quad | 4 ships around Earth (same firepower as main ship) |
+| 5 | Rockets | All bullets become homing mini rockets |
+
 ### Progression System
 - Waves increase in difficulty
 - More enemies spawn each wave

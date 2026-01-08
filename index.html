@@ -1861,7 +1861,7 @@
             });
         }
 
-        // Background music - 6 different 32-bar melodies (5 classical + Jingle Bells for Wave 3)
+        // Background music - 6 different 32-bar melodies (5 classical + Med Ship theme)
         let musicPlaying = false;
         let musicTimeout = null;
         let activeOscillators = [];
@@ -1903,7 +1903,7 @@
         function playMusicLoop() {
             if (!musicPlaying || gameState.gameOver) return;
 
-            // 6 different 32-bar themes (5 classical + 1 Christmas)
+            // 6 different 32-bar themes (5 classical + 1 Med Ship)
             const musicTracks = [
                 // Track 1: Ode to Joy (C major)
                 [
@@ -2121,65 +2121,71 @@
                 { melody: 493.88, chord: [246.94, 493.88], duration: 0.5 }, // B
                 { melody: 659.25, chord: [329.63, 659.25, 987.77], duration: 1.5 } // E (final chord)
             ],
-            // Track 6: Jingle Bells (E major) - Christmas special for Wave 3 (faster tempo)
+            // Track 6: Medical Ship Theme - Pulsing sci-fi bonus sound
             [
-                // "Jingle bells, jingle bells, jingle all the way"
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.6 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.6 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 392.00, chord: [196.00, 392.00], duration: 0.3 }, // G
-                { melody: 261.63, chord: [130.81, 261.63], duration: 0.45 }, // C
-                { melody: 293.66, chord: [146.83, 293.66], duration: 0.15 }, // D
-                { melody: 329.63, chord: [164.81, 329.63], duration: 1.2 }, // E
+                // Pulsing low drone intro
+                { melody: 130.81, chord: [65.41, 130.81], duration: 0.25 }, // C2
+                { melody: 0, chord: [65.41], duration: 0.15 }, // Rest with bass
+                { melody: 155.56, chord: [77.78, 155.56], duration: 0.25 }, // Eb2
+                { melody: 0, chord: [77.78], duration: 0.15 }, // Rest with bass
+                { melody: 174.61, chord: [87.31, 174.61], duration: 0.25 }, // F2
+                { melody: 0, chord: [87.31], duration: 0.15 }, // Rest with bass
+                { melody: 196.00, chord: [98.00, 196.00], duration: 0.4 }, // G2
 
-                // "Oh what fun it is to ride in a one-horse open sleigh"
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.15 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.15 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 293.66, chord: [146.83, 293.66], duration: 0.3 }, // D
-                { melody: 293.66, chord: [146.83, 293.66], duration: 0.3 }, // D
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 293.66, chord: [146.83, 293.66], duration: 0.6 }, // D
-                { melody: 392.00, chord: [196.00, 392.00], duration: 0.6 }, // G
+                // Rising pulse pattern
+                { melody: 261.63, chord: [130.81, 196.00], duration: 0.2 }, // C3
+                { melody: 293.66, chord: [130.81, 196.00], duration: 0.2 }, // D3
+                { melody: 311.13, chord: [155.56, 233.08], duration: 0.2 }, // Eb3
+                { melody: 349.23, chord: [174.61, 261.63], duration: 0.2 }, // F3
+                { melody: 392.00, chord: [196.00, 293.66], duration: 0.4 }, // G3
 
-                // "Jingle bells, jingle bells, jingle all the way" (repeat)
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.6 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.6 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 392.00, chord: [196.00, 392.00], duration: 0.3 }, // G
-                { melody: 261.63, chord: [130.81, 261.63], duration: 0.45 }, // C
-                { melody: 293.66, chord: [146.83, 293.66], duration: 0.15 }, // D
-                { melody: 329.63, chord: [164.81, 329.63], duration: 1.2 }, // E
+                // Spaceship hum with beacon pulses
+                { melody: 523.25, chord: [261.63, 392.00], duration: 0.15 }, // C4 beacon
+                { melody: 0, chord: [130.81, 196.00], duration: 0.2 }, // Hum
+                { melody: 523.25, chord: [261.63, 392.00], duration: 0.15 }, // C4 beacon
+                { melody: 0, chord: [130.81, 196.00], duration: 0.2 }, // Hum
+                { melody: 622.25, chord: [311.13, 466.16], duration: 0.15 }, // Eb4 beacon
+                { melody: 0, chord: [155.56, 233.08], duration: 0.2 }, // Hum
+                { melody: 622.25, chord: [311.13, 466.16], duration: 0.15 }, // Eb4 beacon
+                { melody: 0, chord: [155.56, 233.08], duration: 0.3 }, // Hum
 
-                // "Oh what fun it is to ride in a one-horse open sleigh" (repeat)
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 329.63, chord: [164.81, 329.63], duration: 0.3 }, // E
-                { melody: 392.00, chord: [196.00, 392.00], duration: 0.3 }, // G
-                { melody: 392.00, chord: [196.00, 392.00], duration: 0.3 }, // G
-                { melody: 349.23, chord: [174.61, 349.23], duration: 0.3 }, // F
-                { melody: 293.66, chord: [146.83, 293.66], duration: 0.3 }, // D
-                { melody: 261.63, chord: [130.81, 261.63, 392.00], duration: 1.2 } // C (final chord)
+                // Medical alert pattern (cross rhythm)
+                { melody: 783.99, chord: [391.99, 523.25], duration: 0.1 }, // G4
+                { melody: 698.46, chord: [349.23, 523.25], duration: 0.1 }, // F4
+                { melody: 783.99, chord: [391.99, 523.25], duration: 0.1 }, // G4
+                { melody: 0, chord: [196.00, 293.66], duration: 0.3 }, // Rest
+                { melody: 783.99, chord: [391.99, 523.25], duration: 0.1 }, // G4
+                { melody: 698.46, chord: [349.23, 523.25], duration: 0.1 }, // F4
+                { melody: 783.99, chord: [391.99, 523.25], duration: 0.1 }, // G4
+                { melody: 0, chord: [196.00, 293.66], duration: 0.4 }, // Rest
+
+                // Deep pulse section
+                { melody: 196.00, chord: [98.00, 146.83], duration: 0.3 }, // G2
+                { melody: 0, chord: [98.00], duration: 0.1 },
+                { melody: 196.00, chord: [98.00, 146.83], duration: 0.3 }, // G2
+                { melody: 0, chord: [98.00], duration: 0.1 },
+                { melody: 233.08, chord: [116.54, 174.61], duration: 0.3 }, // Bb2
+                { melody: 0, chord: [116.54], duration: 0.1 },
+                { melody: 261.63, chord: [130.81, 196.00], duration: 0.5 }, // C3
+
+                // Rising beacon finale
+                { melody: 392.00, chord: [196.00, 293.66], duration: 0.15 }, // G3
+                { melody: 440.00, chord: [220.00, 329.63], duration: 0.15 }, // A3
+                { melody: 493.88, chord: [246.94, 369.99], duration: 0.15 }, // B3
+                { melody: 523.25, chord: [261.63, 392.00], duration: 0.15 }, // C4
+                { melody: 587.33, chord: [293.66, 440.00], duration: 0.15 }, // D4
+                { melody: 659.25, chord: [329.63, 493.88], duration: 0.15 }, // E4
+                { melody: 698.46, chord: [349.23, 523.25], duration: 0.15 }, // F4
+                { melody: 783.99, chord: [391.99, 587.33], duration: 0.6 }, // G4 hold
+
+                // Repeat pulsing pattern
+                { melody: 130.81, chord: [65.41, 130.81], duration: 0.25 }, // C2
+                { melody: 0, chord: [65.41], duration: 0.15 },
+                { melody: 155.56, chord: [77.78, 155.56], duration: 0.25 }, // Eb2
+                { melody: 0, chord: [77.78], duration: 0.15 },
+                { melody: 174.61, chord: [87.31, 174.61], duration: 0.25 }, // F2
+                { melody: 0, chord: [87.31], duration: 0.15 },
+                { melody: 196.00, chord: [98.00, 196.00, 293.66], duration: 0.8 } // G2 final
             ]
             ];
 
@@ -2278,9 +2284,10 @@
             autoFireMaxCharge: 300,
             autoFireAvailable: true,
             autoFireActive: false, // Currently firing
-            santa: null,
-            santaHasAppeared: false,
-            presents: [],
+            medShip: null,
+            medShipAppearedThisWave: false,
+            medShipAppearances: 0,
+            medPacks: [],
             // Superweapon spawn tracking (multiple per level on higher waves)
             superweaponSpawnsThisWave: 0,
             superweaponSpawnTargets: [], // Array of kill targets for each spawn
@@ -2297,6 +2304,7 @@
             },
             activeSuperweapon: null,
             superweaponTimer: 0,
+            superweaponCooldown: 0, // Prevents accidental trigger on pickup
             satellites: [], // For satellite positions
             quadShips: [], // For quad ship positions
             missiles: [], // For rocket barrage missiles
@@ -2742,12 +2750,13 @@
             gameState.bullets = [];
             gameState.powerUps = [];
             gameState.explosionParticles = [];
-            gameState.presents = [];
+            gameState.medPacks = [];
 
             // Reset temporary power-ups
             gameState.mirrorShip = null;
-            gameState.santa = null;
-            gameState.santaSpawnTimer = null;
+            gameState.medShip = null;
+            gameState.medShipAppearedThisWave = false;
+            gameState.medShipAppearances = 0;
             resetSuperweapons();
 
             // Apply loadout using config values
@@ -2805,13 +2814,8 @@
             gameState.gameOver = false;
             document.getElementById('gameOver').classList.remove('show');
 
-            // Set music track based on wave (Wave 3 starts normal, Jingle Bells only when Santa appears)
-            if (waveNum === 3) {
-                // Wave 3 starts with track 2 (adjusted for skipping track 5)
-                currentMusicTrack = 2;
-            } else {
-                currentMusicTrack = (waveNum - 1) % 5;
-            }
+            // Set music track based on wave (cycle through classical tracks)
+            currentMusicTrack = (waveNum - 1) % 5;
             startBackgroundMusic();
 
             // Update UI
@@ -3639,43 +3643,43 @@
             }
         }
 
-        // Spawn Santa (Level 3 special event - only once)
-        function spawnSanta() {
-            if (gameState.wave !== 3 || gameState.santa || gameState.santaHasAppeared) return;
-
-            gameState.santaHasAppeared = true; // Prevent respawning
-
-            gameState.santa = {
-                x: -100, // Start off-screen left
-                y: 150, // Upper part of screen
-                vx: 1.5, // Move right
-                vy: 0.3, // Slight downward arc
-                duration: 600, // ~10 seconds at 60fps
-                dropTimer: 0,
-                dropInterval: 30, // Drop present every 30 frames (~0.5s)
-                totalDrops: 0,
-                maxDrops: 20
-            };
-
-            // Switch to Jingle Bells music
-            gameState.preSantaMusicTrack = currentMusicTrack;
-            currentMusicTrack = 5; // Jingle Bells
-            startBackgroundMusic();
-
-            // Give all aliens santa hats (they keep moving)
-            gameState.aliens.forEach(alien => {
-                alien.santaHat = true;
-            });
+        // Check if med ship should appear on this wave
+        function shouldMedShipAppear(wave) {
+            // Every other level until 10 (waves 3, 5, 7, 9), then every level from 10+
+            if (wave < 3) return false;
+            if (wave < 10) return wave % 2 === 1; // Odd waves: 3, 5, 7, 9
+            return true; // Wave 10+: every wave
         }
 
-        // Update Santa
-        function updateSanta() {
-            if (!gameState.santa) {
-                // Try to spawn Santa on level 3 after 5 kills
-                if (gameState.wave === 3 && !gameState.paused) {
-                    // Spawn after 5 kills
+        // Spawn Medical Ship
+        function spawnMedShip() {
+            if (!shouldMedShipAppear(gameState.wave) || gameState.medShip || gameState.medShipAppearedThisWave) return;
+
+            gameState.medShipAppearedThisWave = true;
+            gameState.medShipAppearances++;
+
+            gameState.medShip = {
+                x: -100, // Start off-screen left
+                y: 150, // Upper part of screen
+                vx: 1.8, // Faster glide speed
+                vy: 0.3, // Gentle descent
+                duration: 600, // Time on screen
+                activated: false // Starts as alien ship, becomes med ship when hit
+            };
+
+            // Switch to med ship music (track 5)
+            gameState.preMedShipMusicTrack = currentMusicTrack;
+            currentMusicTrack = 5;
+            startBackgroundMusic();
+        }
+
+        // Update Medical Ship
+        function updateMedShip() {
+            if (!gameState.medShip) {
+                // Try to spawn med ship after 5 kills on eligible waves
+                if (shouldMedShipAppear(gameState.wave) && !gameState.paused && !gameState.medShipAppearedThisWave) {
                     if (gameState.waveKills >= 5) {
-                        spawnSanta();
+                        spawnMedShip();
                     }
                 }
                 return;
@@ -3683,188 +3687,240 @@
 
             if (gameState.paused) return;
 
-            // Move Santa across screen
-            gameState.santa.x += gameState.santa.vx * deltaTime;
-            gameState.santa.y += gameState.santa.vy * deltaTime;
+            // Move med ship across screen (slow glide)
+            gameState.medShip.x += gameState.medShip.vx * deltaTime;
+            gameState.medShip.y += gameState.medShip.vy * deltaTime;
 
-            // Update arc (slow descent and then ascent)
-            if (gameState.santa.duration > 300) {
-                gameState.santa.vy = 0.3; // Descending
+            // Gentle wave motion
+            if (gameState.medShip.duration > 350) {
+                gameState.medShip.vy = 0.2;
             } else {
-                gameState.santa.vy = -0.3; // Ascending
+                gameState.medShip.vy = -0.15;
             }
 
-            // Drop presents
-            gameState.santa.dropTimer += deltaTime;
-            if (gameState.santa.dropTimer >= gameState.santa.dropInterval &&
-                gameState.santa.totalDrops < gameState.santa.maxDrops) {
-                dropPresent();
-                gameState.santa.dropTimer = 0;
-                gameState.santa.totalDrops++;
-            }
+            // Med packs only drop when ship is hit - see checkMedShipCollisions()
 
             // Count down duration
-            gameState.santa.duration -= deltaTime;
-            if (gameState.santa.duration <= 0 || gameState.santa.x > 1100) {
-                // Santa is leaving - restore music and remove hats
-                currentMusicTrack = gameState.preSantaMusicTrack || 2;
+            gameState.medShip.duration -= deltaTime;
+            if (gameState.medShip.duration <= 0 || gameState.medShip.x > 1100) {
+                // Med ship leaving - restore music
+                currentMusicTrack = gameState.preMedShipMusicTrack || 0;
                 startBackgroundMusic();
-
-                // Remove santa hats
-                gameState.aliens.forEach(alien => {
-                    alien.santaHat = false;
-                });
-
-                gameState.santa = null;
-                gameState.santaSpawnTimer = null;
+                gameState.medShip = null;
             }
         }
 
-        // Drop present
-        function dropPresent() {
-            if (!gameState.santa) return;
+        // Drop med pack
+        function dropMedPack() {
+            if (!gameState.medShip) return;
 
-            gameState.presents.push({
-                x: gameState.santa.x + 30, // Drop from sleigh position
-                y: gameState.santa.y + 20,
+            gameState.medPacks.push({
+                x: gameState.medShip.x + 25,
+                y: gameState.medShip.y + 15,
                 vx: 0,
-                vy: 2, // Fall speed
+                vy: 2,
                 rotation: 0,
-                rotationSpeed: 0.1,
-                points: 100
+                rotationSpeed: 0.05 // Slower rotation for med packs
+            });
+            playBonusExplosionSound();
+        }
+
+        // Check bullet collisions with med ship
+        function checkMedShipCollisions() {
+            if (!gameState.medShip || gameState.paused) return;
+
+            const ship = gameState.medShip;
+            // Ship hitbox: x to x+60, y to y+16
+            const shipLeft = ship.x;
+            const shipRight = ship.x + 60;
+            const shipTop = ship.y - 8;
+            const shipBottom = ship.y + 24;
+
+            gameState.bullets = gameState.bullets.filter(bullet => {
+                // Check if bullet hits ship
+                if (bullet.x >= shipLeft && bullet.x <= shipRight &&
+                    bullet.y >= shipTop && bullet.y <= shipBottom) {
+
+                    if (!ship.activated) {
+                        // First hit - transform from alien to med ship
+                        ship.activated = true;
+                        showLevelMessage('MED SHIP ACTIVATED!');
+                        playBonusExplosionSound();
+                    } else {
+                        // Already activated - drop a med pack (no limit)
+                        dropMedPack();
+                    }
+                    return false; // Remove bullet
+                }
+                return true; // Keep bullet
             });
         }
 
-        // Update presents
-        function updatePresents() {
+        // Update med packs
+        function updateMedPacks() {
             if (gameState.paused) return;
 
-            for (let i = gameState.presents.length - 1; i >= 0; i--) {
-                const present = gameState.presents[i];
+            for (let i = gameState.medPacks.length - 1; i >= 0; i--) {
+                const pack = gameState.medPacks[i];
 
                 // Glide toward Earth center
-                const dx = centerX - present.x;
-                const dy = centerY - present.y;
+                const dx = centerX - pack.x;
+                const dy = centerY - pack.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
 
-                const speed = 2.5; // Glide speed
-                present.x += (dx / dist) * speed * deltaTime;
-                present.y += (dy / dist) * speed * deltaTime;
-                present.rotation += present.rotationSpeed * deltaTime;
+                const speed = 2.5;
+                pack.x += (dx / dist) * speed * deltaTime;
+                pack.y += (dy / dist) * speed * deltaTime;
+                pack.rotation += pack.rotationSpeed * deltaTime;
 
-                // Check if present reached Earth (center area)
-                if (dist < 50) { // Reached Earth surface
-                    // Santa presents boost Earth health by 1
+                // Check if med pack reached Earth
+                if (dist < 50) {
+                    // Med packs boost Earth health by 1
                     gameState.earthHealth = Math.min(gameState.earthHealth + 1, gameConfig.player.maxEarthHealth);
-                    gameState.presents.splice(i, 1);
-                    playBonusExplosionSound(); // Use bonus sound
+                    gameState.medPacks.splice(i, 1);
+                    playBonusExplosionSound();
                     showLevelMessage('EARTH +1 HP!');
-                    flashStatusBar(2); // Earth HP bar
+                    flashStatusBar(2);
                     updateUI();
-                } else if (present.y > canvas.height + 50) {
-                    // Off screen, remove
-                    gameState.presents.splice(i, 1);
+                } else if (pack.y > canvas.height + 50) {
+                    gameState.medPacks.splice(i, 1);
                 }
             }
         }
 
-        // Draw Santa sleigh and reindeer
-        function drawSanta() {
-            if (!gameState.santa) return;
+        // Draw Med Ship (alien ship before activation, medical ship after)
+        function drawMedShip() {
+            if (!gameState.medShip) return;
 
-            const x = gameState.santa.x;
-            const y = gameState.santa.y;
+            const x = gameState.medShip.x;
+            const y = gameState.medShip.y;
+            const activated = gameState.medShip.activated;
 
             ctx.save();
 
-            // Sleigh (draw first so reindeer appear in front)
-            ctx.fillStyle = '#8B0000'; // Dark red
-            ctx.fillRect(x, y + 5, 50, 20);
+            if (!activated) {
+                // ALIEN SHIP (before first hit) - menacing red/orange
+                const pulse = Math.sin(Date.now() / 80) * 0.2 + 0.8;
 
-            // Sleigh curves
-            ctx.fillRect(x - 5, y + 15, 60, 5);
+                // Main hull (dark red)
+                ctx.fillStyle = '#660000';
+                ctx.fillRect(x, y, 60, 16);
 
-            // Sleigh runners
-            ctx.fillStyle = '#FFD700'; // Gold
-            ctx.fillRect(x - 5, y + 25, 60, 3);
+                // Armored plating
+                ctx.fillStyle = '#880000';
+                ctx.fillRect(x + 5, y + 2, 50, 12);
 
-            // Santa
-            ctx.fillStyle = '#ff0000'; // Red suit
-            ctx.fillRect(x + 15, y - 5, 20, 25);
+                // Cockpit (orange glow)
+                ctx.fillStyle = `rgba(255, 100, 0, ${pulse})`;
+                ctx.fillRect(x + 50, y + 4, 10, 8);
 
-            // Head
-            ctx.fillStyle = '#ffdbac'; // Skin tone
-            ctx.fillRect(x + 20, y - 10, 10, 8);
+                // Engine glow (pulsing red/orange at back)
+                ctx.fillStyle = `rgba(255, 80, 0, ${pulse})`;
+                ctx.fillRect(x - 8, y + 3, 8, 10);
 
-            // Hat
-            ctx.fillStyle = '#ff0000';
-            ctx.fillRect(x + 18, y - 18, 14, 8);
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(x + 18, y - 10, 14, 2);
-            ctx.fillRect(x + 30, y - 16, 4, 4);
+                // Engine exhaust
+                ctx.fillStyle = `rgba(255, 50, 0, ${pulse * 0.5})`;
+                ctx.fillRect(x - 14, y + 5, 6, 6);
 
-            // Belt
-            ctx.fillStyle = '#000000';
-            ctx.fillRect(x + 15, y + 8, 20, 3);
-            ctx.fillStyle = '#FFD700';
-            ctx.fillRect(x + 23, y + 7, 4, 5);
+                // Spiky fins (aggressive look)
+                ctx.fillStyle = '#550000';
+                ctx.beginPath();
+                ctx.moveTo(x + 20, y);
+                ctx.lineTo(x + 30, y - 12);
+                ctx.lineTo(x + 35, y);
+                ctx.closePath();
+                ctx.fill();
 
-            // Beard
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(x + 20, y - 2, 10, 6);
+                ctx.beginPath();
+                ctx.moveTo(x + 20, y + 16);
+                ctx.lineTo(x + 30, y + 28);
+                ctx.lineTo(x + 35, y + 16);
+                ctx.closePath();
+                ctx.fill();
 
-            // Draw 3 reindeer in front (draw last so they appear on top)
-            for (let i = 0; i < 3; i++) {
-                const rx = x - 60 + (i * 20);
-                const ry = y + (i % 2 === 0 ? -5 : 5);
+                // Weapon ports
+                ctx.fillStyle = '#ff4400';
+                ctx.fillRect(x + 55, y + 2, 4, 3);
+                ctx.fillRect(x + 55, y + 11, 4, 3);
 
-                // Reindeer body
-                ctx.fillStyle = '#8B4513';
-                ctx.fillRect(rx, ry, 12, 8);
+            } else {
+                // MEDICAL SHIP (after activation) - white/silver friendly
 
-                // Head
-                ctx.fillRect(rx + 12, ry - 4, 8, 8);
+                // Main hull (silver/white elongated shape)
+                ctx.fillStyle = '#e0e0e0';
+                ctx.fillRect(x, y, 60, 16);
 
-                // Antlers
-                ctx.fillStyle = '#654321';
-                ctx.fillRect(rx + 14, ry - 8, 2, 4);
-                ctx.fillRect(rx + 18, ry - 8, 2, 4);
+                // Cockpit (darker front section)
+                ctx.fillStyle = '#a0a0a0';
+                ctx.fillRect(x + 50, y + 2, 12, 12);
 
-                // Legs (animated)
-                const legOffset = Math.floor(gameState.santa.x / 10) % 2;
-                ctx.fillRect(rx + 2, ry + 8, 2, 4 + legOffset);
-                ctx.fillRect(rx + 8, ry + 8, 2, 4 - legOffset);
+                // Cockpit window (cyan glow)
+                ctx.fillStyle = '#00ffff';
+                ctx.fillRect(x + 54, y + 4, 6, 8);
 
-                // Red nose on lead reindeer
-                if (i === 2) {
-                    ctx.fillStyle = '#ff0000';
-                    ctx.fillRect(rx + 20, ry, 3, 3);
-                }
+                // Red cross on hull (medical symbol)
+                ctx.fillStyle = '#ff0000';
+                ctx.fillRect(x + 20, y + 2, 4, 12); // Vertical
+                ctx.fillRect(x + 14, y + 6, 16, 4); // Horizontal
+
+                // Engine glow (pulsing cyan at back)
+                const pulse = Math.sin(Date.now() / 100) * 0.3 + 0.7;
+                ctx.fillStyle = `rgba(0, 255, 255, ${pulse})`;
+                ctx.fillRect(x - 8, y + 3, 8, 10);
+
+                // Engine exhaust particles
+                ctx.fillStyle = `rgba(0, 200, 255, ${pulse * 0.5})`;
+                ctx.fillRect(x - 14, y + 5, 6, 6);
+                ctx.fillRect(x - 18, y + 6, 4, 4);
+
+                // Top fin
+                ctx.fillStyle = '#c0c0c0';
+                ctx.beginPath();
+                ctx.moveTo(x + 25, y);
+                ctx.lineTo(x + 35, y - 8);
+                ctx.lineTo(x + 40, y);
+                ctx.closePath();
+                ctx.fill();
+
+                // Bottom fin
+                ctx.beginPath();
+                ctx.moveTo(x + 25, y + 16);
+                ctx.lineTo(x + 35, y + 24);
+                ctx.lineTo(x + 40, y + 16);
+                ctx.closePath();
+                ctx.fill();
+
+                // Hull detail lines
+                ctx.fillStyle = '#888888';
+                ctx.fillRect(x + 5, y + 7, 10, 2);
+                ctx.fillRect(x + 42, y + 7, 8, 2);
             }
 
             ctx.restore();
         }
 
-        // Draw presents
-        function drawPresents() {
-            gameState.presents.forEach(present => {
+        // Draw med packs (white case with red cross)
+        function drawMedPacks() {
+            gameState.medPacks.forEach(pack => {
                 ctx.save();
-                ctx.translate(present.x, present.y);
-                ctx.rotate(present.rotation);
+                ctx.translate(pack.x, pack.y);
+                ctx.rotate(pack.rotation);
 
-                // Present box
+                // White case
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(-7, -7, 14, 14);
+
+                // Case border
+                ctx.fillStyle = '#cccccc';
+                ctx.fillRect(-8, -8, 16, 2);
+                ctx.fillRect(-8, 6, 16, 2);
+                ctx.fillRect(-8, -8, 2, 16);
+                ctx.fillRect(6, -8, 2, 16);
+
+                // Red cross
                 ctx.fillStyle = '#ff0000';
-                ctx.fillRect(-8, -8, 16, 16);
-
-                // Ribbon
-                ctx.fillStyle = '#FFD700';
-                ctx.fillRect(-2, -8, 4, 16); // Vertical
-                ctx.fillRect(-8, -2, 16, 4); // Horizontal
-
-                // Bow
-                ctx.fillRect(-6, -12, 4, 4);
-                ctx.fillRect(2, -12, 4, 4);
-                ctx.fillRect(-2, -10, 4, 2);
+                ctx.fillRect(-1, -5, 2, 10); // Vertical
+                ctx.fillRect(-5, -1, 10, 2); // Horizontal
 
                 ctx.restore();
             });
@@ -3980,6 +4036,12 @@
 
         // Check keyboard for superweapon triggers
         function checkSuperweaponKeys() {
+            // Don't allow triggers during cooldown (prevents accidental use on pickup)
+            if (gameState.superweaponCooldown > 0) {
+                gameState.superweaponCooldown -= deltaTime;
+                return;
+            }
+
             Object.entries(gameState.superweapons).forEach(([weaponId, sw]) => {
                 if (sw.count > 0 && sw.key && gameState.keys[sw.key]) {
                     triggerSuperweapon(weaponId);
@@ -4332,13 +4394,16 @@
             });
         }
 
-        // Shoot from quad ships
+        // Shoot from quad ships (same firepower as main ship)
         function shootFromQuadShips() {
             if (!gameState.superweapons.quad.active) return;
 
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
             const orbitRadius = gameState.player.orbitRadius;
+            const bulletSpeed = gameState.player.bulletSpeed;
+            const bulletMode = gameState.player.bulletMode;
+            const isRocket = gameState.superweapons.rockets.active;
 
             gameState.quadShips.forEach(ship => {
                 if (!ship.alive) return;
@@ -4347,15 +4412,69 @@
                 const x = centerX + Math.cos(angle) * orbitRadius;
                 const y = centerY + Math.sin(angle) * orbitRadius;
 
-                // Shoot outward (same as main ship)
-                gameState.bullets.push({
-                    x: x,
-                    y: y,
-                    vx: Math.cos(angle) * gameState.player.bulletSpeed,
-                    vy: Math.sin(angle) * gameState.player.bulletSpeed,
-                    size: 3,
-                    isRocket: gameState.superweapons.rockets.active
-                });
+                // Shoot with same firepower as main ship
+                if (bulletMode === 1) {
+                    gameState.bullets.push({
+                        x: x, y: y,
+                        vx: Math.cos(angle) * bulletSpeed,
+                        vy: Math.sin(angle) * bulletSpeed,
+                        size: 3, isRocket: isRocket
+                    });
+                } else if (bulletMode === 2) {
+                    const spread = 0.15;
+                    gameState.bullets.push({
+                        x: x, y: y,
+                        vx: Math.cos(angle - spread) * bulletSpeed,
+                        vy: Math.sin(angle - spread) * bulletSpeed,
+                        size: 3, isRocket: isRocket
+                    });
+                    gameState.bullets.push({
+                        x: x, y: y,
+                        vx: Math.cos(angle + spread) * bulletSpeed,
+                        vy: Math.sin(angle + spread) * bulletSpeed,
+                        size: 3, isRocket: isRocket
+                    });
+                } else if (bulletMode === 3) {
+                    const spread = 0.2;
+                    gameState.bullets.push({
+                        x: x, y: y,
+                        vx: Math.cos(angle) * bulletSpeed,
+                        vy: Math.sin(angle) * bulletSpeed,
+                        size: 3, isRocket: isRocket
+                    });
+                    gameState.bullets.push({
+                        x: x, y: y,
+                        vx: Math.cos(angle - spread) * bulletSpeed,
+                        vy: Math.sin(angle - spread) * bulletSpeed,
+                        size: 3, isRocket: isRocket
+                    });
+                    gameState.bullets.push({
+                        x: x, y: y,
+                        vx: Math.cos(angle + spread) * bulletSpeed,
+                        vy: Math.sin(angle + spread) * bulletSpeed,
+                        size: 3, isRocket: isRocket
+                    });
+                } else if (bulletMode === 4) {
+                    const spread = 0.15;
+                    for (let i = -1.5; i <= 1.5; i++) {
+                        gameState.bullets.push({
+                            x: x, y: y,
+                            vx: Math.cos(angle + spread * i) * bulletSpeed,
+                            vy: Math.sin(angle + spread * i) * bulletSpeed,
+                            size: 3, isRocket: isRocket
+                        });
+                    }
+                } else if (bulletMode >= 5) {
+                    const spread = 0.12;
+                    for (let i = -2; i <= 2; i++) {
+                        gameState.bullets.push({
+                            x: x, y: y,
+                            vx: Math.cos(angle + spread * i) * bulletSpeed,
+                            vy: Math.sin(angle + spread * i) * bulletSpeed,
+                            size: 3, isRocket: isRocket
+                        });
+                    }
+                }
             });
         }
 
@@ -4912,13 +5031,16 @@
                 const distToPlayer = Math.sqrt(dxPlayer * dxPlayer + dyPlayer * dyPlayer);
 
                 if (distToPlayer < 15) {
-                    applyPowerUp(powerUp.type);
-                    playPowerUpSound();
+                    collectPowerUp(powerUp);
                     return false;
                 }
 
-                // All power-ups get removed if they reach Earth center
+                // Power-ups that reach Earth center
                 if (distToEarth < 40) {
+                    // Superweapons and lives auto-collect when reaching Earth
+                    if (powerUp.isSuperweapon || powerUp.isLifeBonus) {
+                        collectPowerUp(powerUp);
+                    }
                     return false;
                 }
 
@@ -4930,14 +5052,11 @@
         function drawPowerUps() {
             const time = Date.now();
 
-            // Superweapon types that get special spinning icon
-            const superweaponTypes = ['shield', 'satellites', 'quad', 'rockets', 'hyperkill'];
-
             gameState.powerUps.forEach(powerUp => {
                 ctx.save();
                 ctx.translate(powerUp.x, powerUp.y);
 
-                const isSuperweapon = superweaponTypes.includes(powerUp.type);
+                const isSuperweapon = powerUp.isSuperweapon;
                 const isLifeBonus = powerUp.isLifeBonus;
 
                 if (isLifeBonus) {
@@ -4976,40 +5095,47 @@
                     ctx.textBaseline = 'middle';
                     ctx.fillText('L', 0, 1);
                 } else if (isSuperweapon) {
-                    // Superweapon: pulsing "P" in a solid circle
-                    const pulse = Math.sin(time * 0.006) * 0.2 + 1.0;
-                    const size = 12 * pulse;
+                    // Superweapon pack: bright pulsing icon with number 1-5
+                    const pulse = Math.sin(time * 0.008) * 0.25 + 1.0;
+                    const size = 14 * pulse;
 
-                    // Pulsing outer glow
-                    const glowSize = size + 6;
+                    // Rainbow color cycling for extra brightness
+                    const hue = (time * 0.1) % 360;
+                    const brightColor = `hsl(${hue}, 100%, 60%)`;
+                    const glowColor = `hsl(${hue}, 100%, 50%)`;
+
+                    // Intense outer glow
+                    const glowSize = size + 10;
                     const gradient = ctx.createRadialGradient(0, 0, size - 2, 0, 0, glowSize);
-                    gradient.addColorStop(0, powerUp.color + 'ff');
-                    gradient.addColorStop(0.5, powerUp.color + '66');
-                    gradient.addColorStop(1, powerUp.color + '00');
+                    gradient.addColorStop(0, '#ffffff');
+                    gradient.addColorStop(0.3, brightColor);
+                    gradient.addColorStop(0.7, glowColor + '66');
+                    gradient.addColorStop(1, glowColor + '00');
                     ctx.fillStyle = gradient;
                     ctx.beginPath();
                     ctx.arc(0, 0, glowSize, 0, Math.PI * 2);
                     ctx.fill();
 
-                    // Solid circle background
-                    ctx.fillStyle = powerUp.color;
+                    // Bright white/colored circle background
+                    ctx.fillStyle = '#ffffff';
                     ctx.beginPath();
                     ctx.arc(0, 0, size, 0, Math.PI * 2);
                     ctx.fill();
 
-                    // White border
-                    ctx.strokeStyle = '#fff';
-                    ctx.lineWidth = 2;
+                    // Colored border
+                    ctx.strokeStyle = brightColor;
+                    ctx.lineWidth = 3;
                     ctx.beginPath();
                     ctx.arc(0, 0, size, 0, Math.PI * 2);
                     ctx.stroke();
 
-                    // "P" label
-                    ctx.fillStyle = '#fff';
-                    ctx.font = 'bold 14px monospace';
+                    // Number label (1-5)
+                    const num = powerUp.superweaponCount || 1;
+                    ctx.fillStyle = '#000';
+                    ctx.font = 'bold 16px monospace';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText('P', 0, 1);
+                    ctx.fillText(num.toString(), 0, 1);
                 } else {
                     // Regular power-up: static square box
                     const glowSize = 16;
@@ -5064,6 +5190,27 @@
                 void bar.offsetWidth;
                 bar.classList.add('flash');
                 setTimeout(() => bar.classList.remove('flash'), 500);
+            }
+        }
+
+        // Collect a power-up (handles superweapon packs specially)
+        function collectPowerUp(powerUp) {
+            if (powerUp.type === 'superweapon_pack') {
+                // Give N random superweapons based on the number shown
+                const count = powerUp.superweaponCount || 1;
+                const superweaponIds = ['shield', 'hyperkill', 'satellites', 'quad', 'rockets'];
+                for (let i = 0; i < count; i++) {
+                    const randomId = superweaponIds[Math.floor(Math.random() * superweaponIds.length)];
+                    giveSuperweapon(randomId);
+                }
+                // Set cooldown to prevent accidental trigger (~1 second at 60fps)
+                gameState.superweaponCooldown = 60;
+                showLevelMessage(`+${count} SUPERWEAPON${count > 1 ? 'S' : ''}!`);
+                flashStatusBar(6);
+                playPowerUpSound();
+            } else {
+                applyPowerUp(powerUp.type);
+                playPowerUpSound();
             }
         }
 
@@ -5182,11 +5329,6 @@
                 orbitDistance: distance // Track for orbital movement
             };
 
-            // If Santa is on screen, new aliens get santa hats
-            if (gameState.santa) {
-                alien.santaHat = true;
-            }
-
             gameState.aliens.push(alien);
         }
 
@@ -5209,11 +5351,6 @@
                 wobbleOffset: Math.random() * Math.PI * 2,
                 orbitDistance: distance
             };
-
-            // If Santa is on screen, new aliens get santa hats
-            if (gameState.santa) {
-                alien.santaHat = true;
-            }
 
             gameState.aliens.push(alien);
         }
@@ -5418,42 +5555,7 @@
         function drawAliens() {
             gameState.aliens.forEach(alien => {
                 draw8BitAlien(alien.x, alien.y, alien.type);
-
-                // Draw Santa hat if alien has one
-                if (alien.santaHat) {
-                    drawSantaHat(alien.x, alien.y, alien.type.size);
-                }
             });
-        }
-
-        // Draw Santa hat on alien
-        function drawSantaHat(x, y, alienSize) {
-            const s = alienSize;
-            ctx.save();
-            ctx.translate(x, y - s * 1.1); // Position above alien
-
-            // Hat base (red)
-            ctx.fillStyle = '#cc0000';
-            ctx.fillRect(-s * 0.6, -s * 0.3, s * 1.2, s * 0.4);
-
-            // Hat triangle part
-            ctx.beginPath();
-            ctx.moveTo(-s * 0.5, -s * 0.3);
-            ctx.lineTo(0, -s * 0.9);
-            ctx.lineTo(s * 0.5, -s * 0.3);
-            ctx.closePath();
-            ctx.fill();
-
-            // White fur trim
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(-s * 0.7, 0, s * 1.4, s * 0.2);
-
-            // White pompom
-            ctx.beginPath();
-            ctx.arc(0, -s * 0.9, s * 0.15, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.restore();
         }
 
         // Check collisions
@@ -5626,11 +5728,8 @@
             // Check if we've spawned all superweapons for this wave
             if (gameState.superweaponSpawnsThisWave >= gameState.superweaponSpawnTargets.length) return;
 
-            // Pick a random superweapon (can collect multiples of the same type)
-            const superweaponIds = ['shield', 'hyperkill', 'satellites', 'quad', 'rockets'];
-            const chosenId = superweaponIds[Math.floor(Math.random() * superweaponIds.length)];
-            const swConfig = gameConfig.superweaponTypes.find(p => p.id === chosenId);
-            if (!swConfig) return;
+            // Random number 1-5 determines how many superweapons you get
+            const superweaponCount = Math.floor(Math.random() * 5) + 1;
 
             // Spawn at random position at edge of screen
             const angle = Math.random() * Math.PI * 2;
@@ -5641,9 +5740,8 @@
             gameState.powerUps.push({
                 x: x,
                 y: y,
-                type: swConfig.id,
-                color: swConfig.color,
-                label: swConfig.label,
+                type: 'superweapon_pack',
+                superweaponCount: superweaponCount,
                 isSuperweapon: true
             });
 
@@ -5770,9 +5868,9 @@
                 // Reset superweapon pickup counter for new level
                 gameState.superweaponPickupsThisLevel = 0;
                 gameState.explosionParticles = [];
-                gameState.presents = [];
-                gameState.santa = null;
-                gameState.santaSpawnTimer = null;
+                gameState.medPacks = [];
+                gameState.medShip = null;
+                gameState.medShipAppearedThisWave = false;
                 updateUI();
 
                 // Show new wave message
@@ -5781,15 +5879,8 @@
                 // Wait before starting music (1.5s)
                 setTimeout(() => {
                     gameState.paused = false;
-                    // Set music track for new level (Wave 3 starts normal, Jingle Bells only when Santa appears)
-                    if (gameState.wave === 3) {
-                        // Wave 3 starts with track 2 (adjusted for skipping track 5)
-                        currentMusicTrack = 2;
-                    } else {
-                        // Use wave-based cycling for classical tracks (skip Wave 3)
-                        const adjustedWave = gameState.wave > 3 ? gameState.wave - 1 : gameState.wave;
-                        currentMusicTrack = (adjustedWave - 1) % 5;
-                    }
+                    // Set music track for new level (cycle through classical tracks)
+                    currentMusicTrack = (gameState.wave - 1) % 5;
                     startBackgroundMusic();
                 }, 1500);
             }, 2000);
@@ -6333,9 +6424,10 @@
                 autoFireMaxCharge: 300,
                 autoFireAvailable: true,
                 autoFireActive: false,
-                santa: null,
-                santaHasAppeared: false,
-                presents: [],
+                medShip: null,
+                medShipAppearedThisWave: false,
+                medShipAppearances: 0,
+                medPacks: [],
                 // Superweapon spawn tracking (multiple per level on higher waves)
                 superweaponSpawnsThisWave: 0,
                 superweaponSpawnTargets: [],
@@ -6352,6 +6444,7 @@
                 },
                 activeSuperweapon: null,
                 superweaponTimer: 0,
+                superweaponCooldown: 0,
                 satellites: [],
                 quadShips: [],
                 missiles: [],
@@ -6545,14 +6638,15 @@
                 updateAliens();
                 updateExplosionParticles();
                 updateMirrorShip();
-                updateSanta();
-                updatePresents();
+                updateMedShip();
+                updateMedPacks();
                 // Superweapon updates
                 updateActiveSuperweapon();
                 updateSatellites();
                 updateMissiles();
                 checkShieldCollisions();
                 checkSatelliteCollisions();
+                checkMedShipCollisions();
                 checkCollisions();
                 updateStatusBars();
 
@@ -6568,8 +6662,8 @@
                 drawBullets();
                 drawMissiles();
                 drawAliens();
-                drawSanta();
-                drawPresents();
+                drawMedShip();
+                drawMedPacks();
             }
         }
 
